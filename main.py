@@ -1,14 +1,4 @@
-def get_quests(filepath):
-    with open(filepath, 'r') as file_local:
-        quests_local = file_local.readlines()
-    return quests_local
-
-
-def write_quests(filepath, quests_arg):
-    with open(filepath, 'w') as file:
-        file.writelines(quests_arg)
-
-
+import functions
 
 while True:
     # Get user input and strip extra space chars and make case insensitive
@@ -19,15 +9,15 @@ while True:
     if user_action.startswith("add"):
         quest = user_action[4:]
 
-        quests = get_quests('files/quests.txt')
+        quests = functions.get_quests()
 
         quests.append(quest + '\n')
 
-        write_quests('files/quests.txt', quests)
+        functions.write_quests(quests)
 
     elif user_action.startswith("show"):
 
-        quests = get_quests('files/quests.txt')
+        quests = functions.get_quests()
 
 
         for index, item in enumerate(quests):
@@ -44,12 +34,12 @@ while True:
             number = int(user_action[5:])
             number = number - 1
 
-            quests = get_quests('files/quests.txt')
+            quests = functions.get_quests()
 
             new_quest = input("Enter new quest: ")
             quests[number] = new_quest + "\n"
 
-            write_quests('files/quests.txt', quests)
+            functions.write_quests(quests)
         except ValueError:
             print("Your command is not valid.")
             continue
@@ -58,12 +48,12 @@ while True:
         try:
             number = int(user_action[9:])
 
-            quests = get_quests('files/quests.txt')
+            quests = functions.get_quests()
             index = number - 1
             quest_to_remove = quests[index].strip('\n')
             quests.pop(index)
 
-            write_quests('files/quests.txt', quests)
+            functions.write_quests(quests)
 
             message = f"Quest {quest_to_remove} has been removed from the list. Great job, adventurer!"
             print(message)
