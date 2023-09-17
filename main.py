@@ -1,4 +1,8 @@
 import functions
+import time
+
+now = time.strftime(%b %d, %Y %H:%M)
+print(f"It is {now}")
 
 while True:
     # Get user input and strip extra space chars and make case insensitive
